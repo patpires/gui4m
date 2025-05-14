@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    color: #333;
+}
+
+#frases {
+    max-width: 300px;
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.found {
+    color: green;
+}
+
+canvas {
+    border: 1px solid #333;
+    margin-top: 20px;
+}
+
+#mensagem {
+    margin-top: 20px;
+    color: green;
+    font-weight: bold;
+}
+
+#congrats {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: none; /* Inicialmente escondido */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#layer {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+    display: none;
+}
