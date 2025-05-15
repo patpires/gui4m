@@ -27,133 +27,45 @@ const inicializarJogo = () => {
     document.getElementById('congrats').style.display = 'none';
 };
 
+
 const colocarPalavraNoGrid = (palavra) => {
     let colocada = false;
+    const direcoes = [
+        { x: 1, y: 0 },  // Horizontal direita
+        { x: -1, y: 0 }, // Horizontal esquerda
+        { x: 0, y: 1 },  // Vertical para baixo
+        { x: 0, y: -1 }, // Vertical para cima
+        { x: 1, y: 1 },  // Diagonal direita-baixo
+        { x: -1, y: 1 }, // Diagonal esquerda-baixo
+        { x: 1, y: -1 }, // Diagonal direita-cima
+        { x: -1, y: -1 } // Diagonal esquerda-cima
+    ];
+
     while (!colocada) {
-        const direction = Math.floor(Math.random() * 8);
-        let startX, startY;
+        const direction = Math.floor(Math.random() * direcoes.length);
+        const dir = direcoes[direction];
+        const startX = Math.floor(Math.random() * gridSize);
+        const startY = Math.floor(Math.random() * gridSize);
         let podeColocar = true;
 
-        if (direction === 0) {
-            startX = Math.floor(Math.random() * (gridSize - palavra.length));
-            startY = Math.floor(Math.random() * gridSize);
+        for (let i = 0; i < palavra.length; i++) {
+            const newX = startX + i * dir.x;
+            const newY = startY + i * dir.y;
+
+            if (newX < 0 || newY < 0 || newX >= gridSize || newY >= gridSize || 
+                (grid[newY][newX] !== '' && grid[newY][newX] !== palavra[i])) {
+                podeColocar = false;
+                break;
+            }
+        }
+
+        if (podeColocar) {
             for (let i = 0; i < palavra.length; i++) {
-                if (grid[startY][startX + i] !== '') {
-                    podeColocar = false;
-                    break;
-                }
+                const newX = startX + i * dir.x;
+                const newY = startY + i * dir.y;
+                grid[newY][newX] = palavra[i];
             }
-            if (podeColocar) {
-                for (let i = 0; i < palavra.length; i++) {
-                    grid[startY][startX + i] = palavra[i];
-                }
-                colocada = true;
-            }
-        } else if (direction === 1) {
-            startX = Math.floor(Math.random() * gridSize);
-            startY = Math.floor(Math.random() * (gridSize - palavra.length));
-            for (let i = 0; i < palavra.length; i++) {
-                if (grid[startY + i][startX] !== '') {
-                    podeColocar = false;
-                    break;
-                }
-            }
-            if (podeColocar) {
-                for (let i = 0; i < palavra.length; i++) {
-                    grid[startY + i][startX] = palavra[i];
-                }
-                colocada = true;
-            }
-        } else if (direction === 2) {
-            startX = Math.floor(Math.random() * (gridSize - palavra.length));
-            startY = Math.floor(Math.random() * (gridSize - palavra.length));
-            for (let i = 0; i < palavra.length; i++) {
-                if (grid[startY + i][startX + i] !== '') {
-                    podeColocar = false;
-                    break;
-                }
-            }
-            if (podeColocar) {
-                for (let i = 0; i < palavra.length; i++) {
-                    grid[startY + i][startX + i] = palavra[i];
-                }
-                colocada = true;
-            }
-        } else if (direction === 3) {
-            startX = Math.floor(Math.random() * (gridSize - palavra.length));
-            startY = Math.floor(Math.random() * (gridSize - palavra.length)) + palavra.length;
-            for (let i = 0; i < palavra.length; i++) {
-                if (grid[startY - i][startX + i] !== '') {
-                    podeColocar = false;
-                    break;
-                }
-            }
-            if (podeColocar) {
-                for (let i = 0; i < palavra.length; i++) {
-                    grid[startY - i][startX + i] = palavra[i];
-                }
-                colocada = true;
-            }
-        } else if (direction === 4) {
-            startX = Math.floor(Math.random() * (gridSize - palavra.length)) + palavra.length;
-            startY = Math.floor(Math.random() * gridSize);
-            for (let i = 0; i < palavra.length; i++) {
-                if (grid[startY][startX - i] !== '') {
-                    podeColocar = false;
-                    break;
-                }
-            }
-            if (podeColocar) {
-                for (let i = 0; i < palavra.length; i++) {
-                    grid[startY][startX - i] = palavra[i];
-                }
-                colocada = true;
-            }
-        } else if (direction === 5) {
-            startX = Math.floor(Math.random() * gridSize);
-            startY = Math.floor(Math.random() * (gridSize - palavra.length)) + palavra.length;
-            for (let i = 0; i < palavra.length; i++) {
-                if (grid[startY - i][startX] !== '') {
-                    podeColocar = false;
-                    break;
-                }
-            }
-            if (podeColocar) {
-                for (let i = 0; i < palavra.length; i++) {
-                    grid[startY - i][startX] = palavra[i];
-                }
-                colocada = true;
-            }
-        } else if (direction === 6) {
-            startX = Math.floor(Math.random() * (gridSize - palavra.length)) + palavra.length;
-            startY = Math.floor(Math.random() * (gridSize - palavra.length)) + palavra.length;
-            for (let i = 0; i < palavra.length; i++) {
-                if (grid[startY - i][startX - i] !== '') {
-                    podeColocar = false;
-                    break;
-                }
-            }
-            if (podeColocar) {
-                for (let i = 0; i < palavra.length; i++) {
-                    grid[startY - i][startX - i] = palavra[i];
-                }
-                colocada = true;
-            }
-        } else if (direction === 7) {
-            startX = Math.floor(Math.random() * (gridSize - palavra.length)) + palavra.length;
-            startY = Math.floor(Math.random() * (gridSize - palavra.length));
-            for (let i = 0; i < palavra.length; i++) {
-                if (grid[startY + i][startX - i] !== '') {
-                    podeColocar = false;
-                    break;
-                }
-            }
-            if (podeColocar) {
-                for (let i = 0; i < palavra.length; i++) {
-                    grid[startY + i][startX - i] = palavra[i];
-                }
-                colocada = true;
-            }
+            colocada = true;
         }
     }
 };
