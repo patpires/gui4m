@@ -3,7 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url('url_da_imagem_do_gui');
+    background-image: url('bg.png');
     background-size: cover; /* Ajuda a cobrir toda a área sem distorcer */
     background-position: center;
     height: 100vh; /* Ajusta o tamanho para cobrir a altura da tela */
