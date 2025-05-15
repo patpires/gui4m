@@ -64,6 +64,7 @@ const colocarPalavraNoGrid = (palavra) => {
                 const newX = startX + i * dir.x;
                 const newY = startY + i * dir.y;
                 grid[newY][newX] = palavra[i];
+                console.log(`Colocando ${palavra[i]} na posição ${newX}, ${newY}`);
             }
             colocada = true;
         }
