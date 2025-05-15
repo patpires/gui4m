@@ -3,8 +3,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f5f5f5;
+    background-image: url('bg.png');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
 }
+
 
 h1 {
     color: #333;
@@ -14,6 +18,7 @@ h1 {
     max-width: 300px;
     list-style-type: none;
     padding: 0;
+    font-family: 'Pacifico', cursive;
 }
 
 li {
@@ -26,7 +31,7 @@ li {
 }
 
 canvas {
-    border: 1px solid #333;
+    border: 5px solid #333;
     margin-top: 20px;
 }
 
@@ -43,7 +48,7 @@ canvas {
     right: 0;
     bottom: 0;
     background: rgba(255, 255, 255, 0.9);
-    display: none; /* Inicialmente escondido */
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -57,6 +62,24 @@ canvas {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.hidden {
-    display: none;
+#meses-icone {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: yellow;
+    padding: 10px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+@media (max-width: 600px) {
+    body {
+        background-size: contain;
+    }
+
+    canvas {
+        width: 300px;
+        height: 300px;
+    }
 }
